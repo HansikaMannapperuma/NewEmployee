@@ -25,7 +25,7 @@ public class EmployeeController {
     Employee newEmployee(@RequestBody Employee newEmployee) {
         return employeeRepository.save(newEmployee);
     }
-    @GetMapping("/employitees/{id}")
+    @GetMapping("/employees/{id}")
     Employee one(@PathVariable int id) {
 
         return employeeRepository.findById(id)
