@@ -20,6 +20,9 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
+	// https://mavenlibs.com/maven/dependency/org.modelmapper/modelmapper
+	implementation("org.modelmapper:modelmapper:3.1.1")
+
 }
 
 tasks.withType<Test> {

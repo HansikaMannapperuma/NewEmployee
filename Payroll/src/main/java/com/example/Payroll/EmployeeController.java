@@ -1,54 +1,45 @@
 package com.example.Payroll;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping(value = "/api")
-
+@RequestMapping(value = "/api/employee")
+@CrossOrigin
 public class EmployeeController {
-    private final EmployeeRepository employeeRepository;
-
-
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
-    }
-    //Aggregate root
-    // tag::get-aggregate-root[]
-    @GetMapping("/employees")
-    List<Employee> all() {
-        return employeeRepository.findAll();
+    @Autowired
+    private EmployeeService employeeService;
+    @GetMapping("/getEmployee")
+    public List<EmployeeDTO> getUser(){
+        return employeeService.getAllUsers();
     }
 
-    @PostMapping("/employees")
-    Employee newEmployee(@RequestBody Employee newEmployee) {
-        return employeeRepository.save(newEmployee);
-    }
-    @GetMapping("/employees/{id}")
-    Employee one(@PathVariable int id) {
-
-        return employeeRepository.findById(id)
-                .orElseThrow(() -> new EmployeeNotFoundException(id));
-    }
-    @PutMapping("/employees/{id}")
-    Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable int id) {
-
-        return employeeRepository.findById(id)
-                .map(employee -> {
-                    employee.setName(newEmployee.getName());
-                    employee.setRole(newEmployee.getRole());
-                    return employeeRepository.save(employee);
-                })
-                .orElseGet(() -> {
-                    newEmployee.setId(id);
-                    return employeeRepository.save(newEmployee);
-                });
+    @PostMapping("/postEmployee")
+    public EmployeeDTO postUser(@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.saveUser(employeeDTO);
     }
 
-    @DeleteMapping("/employees/{id}")
-    void deleteEmployee(@PathVariable int id) {
-        employeeRepository.deleteById(id);
+    @PutMapping("/putEmployee")
+    public EmployeeDTO putUser(EmployeeDTO employeeDTO){
+        return employeeService.updateUser(employeeDTO);
+    }
+
+    @DeleteMapping("/deleteEmployee")
+    public boolean deleteUser(@RequestBody EmployeeDTO employeeDTO){
+        return employeeService.deleteUser(employeeDTO);
+    }
+
+    @GetMapping("/getEmployeeByEmployeeId/{id}")
+    public EmployeeDTO getEmployeeByEmployeeId(@PathVariable String id){
+        return employeeService.getEmployeeByEmployeeId(id);
+    }
+
+    @GetMapping("/getEmployeeByEmployeeIdAndAddress/{id}/{address}")
+    public EmployeeDTO getEmployeeByEmployeeId(@PathVariable int id,@PathVariable String address){
+        return employeeService.getEmployeeByEmployeeIdAndAddress(id,address);
     }
 
 

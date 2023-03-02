@@ -12,9 +12,10 @@ import java.util.Objects;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String role;
