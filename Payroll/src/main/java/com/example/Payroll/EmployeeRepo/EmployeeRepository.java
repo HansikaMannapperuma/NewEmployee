@@ -1,5 +1,6 @@
-package com.example.Payroll;
+package com.example.Payroll.EmployeeRepo;
 
+import com.example.Payroll.Entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -11,4 +12,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
 
     @Query(value = "SELECT * FROM user WHERE id=?1 AND address=?2",nativeQuery = true)
     Employee getEmployeeByEmployeeIdAndAddress(int userId, String address);
+
+
 }

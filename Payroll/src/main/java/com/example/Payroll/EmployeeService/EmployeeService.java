@@ -1,5 +1,8 @@
-package com.example.Payroll;
+package com.example.Payroll.EmployeeService;
 
+import com.example.Payroll.Entity.Employee;
+import com.example.Payroll.EmployeeDTO.EmployeeDTO;
+import com.example.Payroll.EmployeeRepo.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -18,7 +21,7 @@ public class EmployeeService {
     private ModelMapper modelMapper;
 
     public EmployeeDTO saveUser(EmployeeDTO employeeDTO){
-        employeeRepository.save(modelMapper.map(employeeDTO,Employee.class));
+        employeeRepository.save(modelMapper.map(employeeDTO, Employee.class));
         return employeeDTO;
     }
 

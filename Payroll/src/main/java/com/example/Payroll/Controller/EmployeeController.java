@@ -1,5 +1,7 @@
-package com.example.Payroll;
+package com.example.Payroll.Controller;
 
+import com.example.Payroll.EmployeeDTO.EmployeeDTO;
+import com.example.Payroll.EmployeeService.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,7 +9,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/api/employee")
+@RequestMapping(value = "/api/v1/employee")
 @CrossOrigin
 public class EmployeeController {
     @Autowired
